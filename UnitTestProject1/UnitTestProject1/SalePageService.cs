@@ -30,16 +30,17 @@ namespace UnitTestProject1
         {
             this._userService = userService;
             this._salePageRepository = salePageRepository;
+            this._mapper = mapper;
         }
 
         /// <summary>
         /// 取得商品頁
         /// </summary>
-        /// <param name="id">序號</param>
+        /// <param name="salePageId">序號</param>
         /// <returns>商品頁資料</returns>
-        public SalePageDataEntity Get(long id)
+        public SalePageDataEntity Get(long salePageId)
         {
-            var data = this._salePageRepository.Get(id);
+            var data = this._salePageRepository.Get(salePageId);
 
             if (this._userService.IsAuthenticated(data.SalePage_SupplierId) == false)
             {

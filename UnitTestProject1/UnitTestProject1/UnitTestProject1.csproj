@@ -79,7 +79,7 @@
     <Compile Include="SalePage.cs" />
     <Compile Include="SalePageDataEntity.cs" />
     <Compile Include="SalePageService.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="SalePageServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
