@@ -62,9 +62,11 @@ namespace UnitTestProject1
             SalePageService salePageService = new SalePageService(userService, salePageRepository, mapper);
 
             //// Act
+            Action act = () => salePageService.Get(salePageId);
+
             //// Assert
             // Make Fail By Change Exception Type
-            Assert.Throws<ApplicationException>(() => salePageService.Get(salePageId));
+            Assert.Throws<ApplicationException>(act);
         }
 
         /// <summary>
