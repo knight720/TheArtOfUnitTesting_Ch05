@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UnitTestProject1
+﻿namespace UnitTestProject1
 {
+    /// <summary>
+    /// 商品頁 Table
+    /// </summary>
     public class SalePage
     {
         public int SalePage_SupplierId;
@@ -18,7 +15,5 @@ namespace UnitTestProject1
         {
             this.SalePage_SupplierId = supplierId;
         }
-
-
     }
 }

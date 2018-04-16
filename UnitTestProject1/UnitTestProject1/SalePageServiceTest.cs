@@ -6,11 +6,10 @@ namespace UnitTestProject1
 {
     public class SalePageServiceTest
     {
-
         /// <summary>
         /// 5.2 動態建立假物件
         /// </summary>
-        [Fact(DisplayName = "Page 8 動態建立假物件")]
+        [Fact(DisplayName = "Page 08 動態建立假物件")]
         public void SalePage_Not_Null()
         {
             //// Arrange
@@ -24,11 +23,11 @@ namespace UnitTestProject1
             userService.IsAuthenticated(Arg.Any<int>()).Returns(true);
             // Make Fail By Return Null
             //mapper.Map<SalePageDataEntity>(Arg.Any<SalePage>()).Returns((SalePageDataEntity) null);
-            
-            SalePageService salePageService = new SalePageService(userService, salePageRepository, mapper);
+
+            var target = new SalePageService(userService, salePageRepository, mapper);
 
             //// Act
-            var actual = salePageService.Get(salePageId);
+            var actual = target.Get(salePageId);
 
             //// Assert
             Assert.NotNull(actual);
@@ -44,7 +43,7 @@ namespace UnitTestProject1
             //// Arrange
             int supplierId = 11;
             long salePageId = 1111;
-            
+
             ISalePageRepository salePageRepository = Substitute.For<ISalePageRepository>();
             //// 從一個假物件回傳值
             salePageRepository.Get(salePageId).Returns(new SalePage(supplierId));
@@ -59,10 +58,10 @@ namespace UnitTestProject1
             //// 模擬拋出例外 2
             //userService.IsAuthenticated(Arg.Any<int>()).Returns(x => { throw new ApplicationException("訊息.無效的會員"); });
 
-            SalePageService salePageService = new SalePageService(userService, salePageRepository, mapper);
+            var target = new SalePageService(userService, salePageRepository, mapper);
 
             //// Act
-            Action act = () => salePageService.Get(salePageId);
+            Action act = () => target.Get(salePageId);
 
             //// Assert
             // Make Fail By Change Exception Type
@@ -89,13 +88,13 @@ namespace UnitTestProject1
 
             IMapper stubMapper = Substitute.For<IMapper>();
 
-            SalePageService salePageService = new SalePageService(mockUserService, stubSalePageRepository, stubMapper);
+            var target = new SalePageService(mockUserService, stubSalePageRepository, stubMapper);
 
             //// Act
-            salePageService.Get(salePageId);
+            target.Get(salePageId);
 
             //// Assert
-            // Make Fail By Change SalePage() 
+            // Make Fail By Change SalePage()
             mockUserService.Received().IsAuthenticated(Arg.Is<int>(s => s.Equals(supplierId)));
         }
 
@@ -118,14 +117,14 @@ namespace UnitTestProject1
 
             IMapper mockMapper = Substitute.For<IMapper>();
 
-            SalePageService salePageService = new SalePageService(stubUserService, stubSalePageRepository, mockMapper);
+            var target = new SalePageService(stubUserService, stubSalePageRepository, mockMapper);
 
             //// Act
-            salePageService.Get(salePageId);
+            target.Get(salePageId);
 
             //// Assert
             // Make Fail By Change SalePageRepository.Get().Returns();
-            mockMapper.Received().Map<SalePageDataEntity>(Arg.Is<SalePage>( s => s.SalePage_SupplierId == supplierId));
+            mockMapper.Received().Map<SalePageDataEntity>(Arg.Is<SalePage>(s => s.SalePage_SupplierId == supplierId));
         }
     }
 }
